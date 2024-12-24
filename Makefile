@@ -1,7 +1,7 @@
 COMPILER = g++
 COMPILER_FLAGS = -Wall -Wextra -Werror -Wpedantic --pedantic-error -ggdb -O0 -Iinclude
 
-SOURCE_FILES = src/main.cpp src/calc.cpp
+SOURCE_FILES = src/main.cpp src/calc.cpp src/commands.cpp
 OBJECT_FILES = $(SOURCE_FILES:.cpp=.o)
 
 EXEC = calc

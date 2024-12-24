@@ -6,6 +6,7 @@
 #include <cmath>
 
 double parse(std::string expression_string);
+void checkForCommand(std::string expression_string);
 
 void calc() {
 
@@ -13,7 +14,10 @@ void calc() {
     std::string expression_string;
     std::cin >> expression_string;
 
-    // Next, we have to turn that into something that actually makes sense
+    // Now we check to see if the string is a command, if it is then handle accordingly
+    checkForCommand(expression_string);
+
+    // Next, we have to get a result from expression string
     // For this, we will use a parsing library (exprtk)
     double result = parse(expression_string);
 
@@ -27,9 +31,13 @@ void calc() {
 
 }
 
-template <typename T>
-void registerCommands(exprtk::symbol_table<T>& symbol_table) {
-    symbol_table.add_function("clear", clearWrapper<T>);
+void checkForCommand(std::string expression_string) {
+    if (expression_string == "clear") {
+        clearScreen();
+        calc();
+    } else if (expression_string == "exit") {
+        exit(0);
+    }
 }
 
 // Idek, just copied more or less from the exprtk github
@@ -39,7 +47,6 @@ double parse(std::string expression_string) {
     typedef exprtk::parser<double> parser_t;
 
     symbol_table_t symbol_table;
-    registerCommands<double>(symbol_table);
 
     expression_t expression;
     expression.register_symbol_table(symbol_table);
