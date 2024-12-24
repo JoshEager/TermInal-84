@@ -37,6 +37,9 @@ void checkForCommand(std::string expression_string) {
         calc();
     } else if (expression_string == "exit") {
         exit(0);
+    } else if (expression_string == "help") {
+        getHelp();
+        calc();
     }
 }
 
