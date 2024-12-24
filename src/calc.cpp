@@ -2,6 +2,7 @@
 #include "exprtk.hpp"
 #include <string>
 #include <iostream>
+#include <cmath>
 
 double parse(std::string expression_string);
 
@@ -15,8 +16,13 @@ void calc() {
     // For this, we will use a parsing library (exprtk)
     double result = parse(expression_string);
 
-    // Once we get the result, we should print it
-    std::cout << result << '\n'; 
+    // Once we get the result, we should check if it's nan
+    // after we know it isn't, then we should print. 
+    if (std::isnan(result)) {
+        std::cout << "Invalid Syntax! \n";
+    } else {
+        std::cout << result << '\n'; 
+    }
 
 }
 
