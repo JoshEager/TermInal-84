@@ -1,3 +1,4 @@
+#include "commands.h"
 #include "calc.h"
 #include "exprtk.hpp"
 #include <string>
@@ -26,6 +27,10 @@ void calc() {
 
 }
 
+template <typename T>
+void registerCommands(exprtk::symbol_table<T>& symbol_table) {
+    symbol_table.add_function("clear", clearWrapper<T>);
+}
 
 // Idek, just copied more or less from the exprtk github
 double parse(std::string expression_string) {
@@ -34,6 +39,7 @@ double parse(std::string expression_string) {
     typedef exprtk::parser<double> parser_t;
 
     symbol_table_t symbol_table;
+    registerCommands<double>(symbol_table);
 
     expression_t expression;
     expression.register_symbol_table(symbol_table);
@@ -45,3 +51,4 @@ double parse(std::string expression_string) {
 
     return result;
 }
+
