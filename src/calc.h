@@ -1,3 +1,2 @@
-#include <string>
 
 void calc();
