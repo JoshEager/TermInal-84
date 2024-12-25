@@ -1,0 +1,47 @@
+When compiling with g++ and it's a debug config, make sure to use -ggdb. 
+
+For optimization, using -O# should be used.
+    -O0 should be used for no optimization (debug)
+    -O2 should be used for release 
+    -03 may or may not be more efficient than O2, use accordingly
+
+When compiling too, there are some compiler extensions that enabled by default. This is not good for compliance to C++ standards. 
+    - To disable this, add --pedantic-errors to your compilation. 
+
+In order to increase warning level while compiling, the following may be useful: 
+    -Wall
+    -Weffc++
+    -Wextra
+    -Wconversion
+    -Wsign-conversion
+
+If you would like your compiler to treat all warnings as erros (and halt compilation) then:
+    -Werror
+
+If you would like to tell the compiler what standard of c++ you are using, you should use
+    -std=c++x 
+    where x is the last two digits of the year of the standard.
+
+
+
+When you have a program that uses multiple files, one option is to simply make two .cpp files, add a function prototype into the file 
+that is 'importing' the function, compile (but do not link -- get object files), then link the object files togther. 
+    - This works because the linker will recognize the function identifiers of the definition and the prototype are the same
+      and will match a call to the function to the definition in the other file. 
+
+
+
+NameSpaces
+    - namespaces are basically just user defined scope. 
+    - in the standard library, everything is part of the 'std' namespace. 
+    - to access something in a namespace, use the scope resoloution operator ::
+      to the left of the operator is the name of the namespace, and to the right
+      is the name of identifier within the namespace. 
+        For example std::cout is referenceing the cout identifier from the std namespace.
+    
+    - you can also avoid having to have the <namespace>:: prefix alltogether by using a 
+      'using-directive' like this: 
+        using namespace <name of namespace>; 
+    - this is discouraged and considered bad practice though because it undermines the entire
+      point of moving the standard library to its own namespace to begin with: you may get naming 
+      collisions still if you use this method. 
